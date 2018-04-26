@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Práctica tema 5</title>
+		<!-- Cargamos la hoja de estilo en un documento aparte -->
+		<link rel="stylesheet" type="text/css" href="practica.css">
+	</head>
+	<body>
+		
+	<script type="text/javascript">
+			//Empleamos la funcion inicializar, que se ejecuta cuando se carga el body del documento
+		var inicializar = function(){
+			// Creamos una variable para generar el elemento div, al que añadimos argumento de id 
+			var comunidadDiv = document.createElement("div", {id: "comunidadDiv"});
+			// Publicamos en el documento el elemento div generado
+			document.body.appendChild(comunidadDiv);
+			//Agregamos la clase 'miDiv' para dar formato mediante CSS
+			comunidadDiv.className = 'miDiv';
+			// Modificamos el elemento div, para obtener los resultados deseados
+			comunidadDiv.innerHTML='<select id="comunidad" onchange="agregarSelect()"><option value="">Selecciona una Comunidad Autónoma</option><option value="extremadura">Extremadura</option><option value="andalucia">Andalucía</option><option value="mancha">Castilla La Mancha</option></select>';
+		}	
+
+		document.body.onload = inicializar;
+
+		function agregarSelect() {;
+			
+			var ciudadDiv = document.createElement("div", {id: "ciudadDiv"});
+			document.body.appendChild(ciudadDiv);
+			ciudadDiv.className = 'miDiv';
+			var destino=document.getElementById('comunidad').value;
+			var comunidad = document.getElementById('comunidad')
+			comunidad.removeAttribute('onchange');
+			comunidad.disabled = true;
+						
+			// Mediante un switch gestionaremos los distintos casos del select
+			switch (destino){
+
+				case "":
+				console.log("Elija una comunidad");
+				break;
+				
+				case "extremadura":
+				 	console.log("Ha entrado en Extremadura");
+					ciudadDiv.innerHTML='<select id="ciudad" onchange="comprar()"><option value="">Selecciona una ciudad</option><option value="10.99">Cáceres</option><option value="14.99">Badajoz</option><option value="11.99">Mérida</option></select>';
+					break;
+				
+				case "andalucia":
+				console.log("Ha entrado en Andalucia");
+					ciudadDiv.innerHTML='<select id="ciudad" onchange="comprar()"><option value="">Selecciona una ciudad</option><option value="16.99">Almería</option><option value="15.99">Jaén</option><option value="14.99">Granada</option></select>';
+					break;
+				
+				case "mancha":
+				console.log("Ha entrado en Castilla La Mancha");
+					ciudadDiv.innerHTML='<select id="ciudad" onchange="comprar()"><option value="">Selecciona una ciudad</option><option value="19.99">Toledo</option><option value="17.99">Ciudad Real</option><option value="16.99">Albacete</option></select>';
+					break;
+			}
+			
+		} 
+
+		function comprar(){
+		var comprarDiv = document.createElement("div", {id: "comprarDiv"});
+		document.body.appendChild(comprarDiv);
+		comprarDiv.className = 'miDiv';
+		comprarDiv.innerHTML='<input type="submit" id="comprar" value="comprar" onclick="calcularPrecio()"/>'
+		var ciudad = document.getElementById('ciudad')
+		ciudad.removeAttribute('onchange');
+		ciudad.disabled = true;
+		
+		}
+
+		function calcularPrecio(){
+		var precio = document.getElementById("ciudad").value;
+		alert("El precio del billete solicitado es de "+precio+"€");
+		}
+	
+	</script>
+	</body>
+</html>
